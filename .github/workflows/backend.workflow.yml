@@ -1,0 +1,30 @@
+name: Backend CI-WorkFlow
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: "./services/backend"
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x, 23.x]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Install npm packages
+      run: npm install
+    
+    - name: Lint
+      run: npx eslint .
+    
+    - name: Build
+      run: npm run build
