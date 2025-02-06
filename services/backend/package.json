@@ -4,6 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "lint": "npx eslint --cache .",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "prebuild": "npm run lint",
     "build": "npx tsc",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,8 +20,11 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
     "@types/express": "^5.0.0",
+    "eslint": "^9.19.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.23.0"
   }
 }
