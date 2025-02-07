@@ -23,4 +23,9 @@ export default tseslint.config(
     files: ["**/*.js"],
     extends: [tseslint.configs.disableTypeChecked],
   },
+  {
+    rules: {
+      "@typescript-eslint/no-extraneous-class": "off"
+    }
+  },
 );
