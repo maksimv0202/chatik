@@ -5,17 +5,19 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "npx eslint --cache .",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --respawn --env-file=.env --transpile-only src/index.ts",
     "prebuild": "npm run lint",
     "build": "npx tsc",
-    "start": "node .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --env-file=.env .",
+    "migrations:generate": "npx typeorm-ts-node-commonjs migration:generate -d ./src/db/config.ts ./src/db/migrations/Migration",
+    "migrations:run": "npx typeorm-ts-node-commonjs migration:run -d ./src/db/config.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -23,17 +25,26 @@
     "helmet": "^8.0.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",
-    "routing-controllers": "^0.10.4"
+    "routing-controllers": "^0.10.4",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/body-parser": "^1.19.5",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",
     "@types/multer": "^1.4.12",
+    "@types/node": "^22.13.1",
+    "@types/passport": "^1.0.17",
+    "@types/passport-jwt": "^4.0.1",
     "eslint": "^9.19.0",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.23.0"
